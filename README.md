@@ -1,1 +1,3 @@
-# group11-comp3078-capstone_project
+# COMP3078 Capstone Application - Sprint 6
+
+## Automated Inventory Management System
