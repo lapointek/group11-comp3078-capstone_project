@@ -1,4 +1,4 @@
-# Automated Inventory Management System - COMP3078 Capstone Application
+# Automated Inventory Management System
 
 ## How To Use
 
