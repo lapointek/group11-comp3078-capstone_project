@@ -1,16 +1,15 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const userContext = createContext();
 
 // context api to login and logout for user authentication
 const authContext = ({ children }) => {
   const [user, setUser] = useState(null);
-
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   // verify user
   useEffect(() => {
-    const verifiedUser = async () => {
+    const verifyUser = async () => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
@@ -23,6 +22,7 @@ const authContext = ({ children }) => {
               },
             }
           );
+          // if response is successful
           if (response.data.success) {
             setUser(response.data.user);
           }
@@ -33,6 +33,8 @@ const authContext = ({ children }) => {
         if (error.reponse && !error.response.data.error) {
           setUser(null);
         }
+      } finally {
+        setLoading(false);
       }
     };
     verifyUser();
@@ -50,7 +52,7 @@ const authContext = ({ children }) => {
   };
 
   return (
-    <userContext.Provider value={{ user, login, logout }}>
+    <userContext.Provider value={{ user, login, logout, loading }}>
       {children}
     </userContext.Provider>
   );
