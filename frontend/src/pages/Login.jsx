@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../context/authContext";
 import { useNavigate } from "react-router-dom";
 
 // Login
@@ -10,7 +10,7 @@ const Login = () => {
   const [error, setError] = useState(null);
   // login function from authContext
   const { login } = useAuth();
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,6 +63,7 @@ const Login = () => {
               </label>
               <input
                 type="email"
+                id="email"
                 className="w-full px-3 py-2 border"
                 placeholder="Enter Email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -75,6 +76,7 @@ const Login = () => {
               </label>
               <input
                 type="password"
+                id="password"
                 className="w-full px-3 py-2 border"
                 placeholder="********"
                 onChange={(e) => setPassword(e.target.value)}
