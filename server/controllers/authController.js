@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
 
+// login
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -32,8 +33,13 @@ const login = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error.message);
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export { login };
+// verify
+const verify = (req, res) => {
+  return res.status(200).json({ success: true, user: req.user });
+};
+
+export { login, verify };
