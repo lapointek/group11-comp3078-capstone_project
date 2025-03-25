@@ -1,7 +1,8 @@
 import React from "react";
 
 const AdminDashboard = () => {
-  return <div>Admin Dashboard</div>;
+  const { user } = useAuth();
+  return <div>Admin Dashboard {user.name}</div>;
 };
 
 export default AdminDashboard;

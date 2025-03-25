@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useAuth } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
+// Login
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  // login function from authContext
+  const { login } = useAuth();
+  const navigate = useNavigate;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // connect to login api
       const response = await axios.post(
         "http://localhost:3000/api/auth/login",
         {
@@ -15,9 +23,24 @@ const Login = () => {
           password,
         }
       );
-      console.log(response);
+      if (response.data.success) {
+        login(response.data.user);
+        // store token inside local storage
+        localStorage.setItem("token", response.data.token);
+        // if response data is "admin"
+        if (response.data.user.role === "admin") {
+          // navigate to admin-dashboard page
+          navigate("/admin-dashboard");
+        } else {
+          navigate("/employee-dashboard");
+        }
+      }
     } catch (error) {
-      console.log(error);
+      if (error.response && !error.response.data.success) {
+        setError(error.response.data.error);
+      } else {
+        setError("Server Error");
+      }
     }
   };
 
@@ -28,10 +51,11 @@ const Login = () => {
       justify-center bg-gradient-to-b from-sky-600 from-50% to-50% space-y-6"
       >
         <h2 className="font-sevillana text-3xl text-white">
-          Employee Managment
+          Employee Management
         </h2>
         <div className="border shadow p-6 w-80 bg-white">
           <h2 className="text-2xl font-bold mb-4">Login</h2>
+          {error && <p className="text-red-500">{error}</p>}
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-700">
@@ -42,6 +66,7 @@ const Login = () => {
                 className="w-full px-3 py-2 border"
                 placeholder="Enter Email"
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             <div className="mb-4">
@@ -53,6 +78,7 @@ const Login = () => {
                 className="w-full px-3 py-2 border"
                 placeholder="********"
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             <div className="mb-4"></div>
