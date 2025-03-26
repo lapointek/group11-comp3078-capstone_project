@@ -14,19 +14,31 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/admin-dashboard" />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        // only accessible by admin
-        <Route path="/admin-dashboard" element={
+        {/*only accessible by admin*/}
+        <Route
+          path="/admin-dashboard"
+          element={
             <PrivateRoutes>
               <RoleBaseRoutes requiredRole={["admin"]}>
                 <AdminDashboard />
               </RoleBaseRoutes>
             </PrivateRoutes>
-          }>
+          }
+        >
           <Route index element={<AdminSummary />}></Route>
-          <Route path="/admin-dashboard/departments" element={<DepartmentList />}></Route>
-          <Route path="/admin-dashboard/add-department" element={<AddDepartment />}></Route>
+          <Route
+            path="/admin-dashboard/departments"
+            element={<DepartmentList />}
+          ></Route>
+          <Route
+            path="/admin-dashboard/add-department"
+            element={<AddDepartment />}
+          ></Route>
         </Route>
-        <Route path="/employee-dashboard" element={<EmployeeDashboard />}></Route>
+        <Route
+          path="/employee-dashboard"
+          element={<EmployeeDashboard />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

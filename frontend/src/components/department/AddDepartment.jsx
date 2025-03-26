@@ -1,11 +1,54 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddDepartment = () => {
+  const [department, setDepartment] = useState({
+    dep_name: "",
+    description: "",
+  });
+  const navigate = useNavigate();
+
+  // extract name and value from e.target
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    // update object
+    setDepartment({ ...department, [name]: value });
+  };
+
+  // on submit
+  const handleSubmit = async (e) => {
+    // prevent default submit
+    e.preventDefault();
+    // pass data to department
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/department/add",
+        department,
+        {
+          // check if admin or employee
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")} `,
+          },
+        }
+      );
+      // if success is true, navigate to department list
+      if (response.data.success) {
+        navigate("/admin-dashboard/departments");
+      } else {
+        alert("Failed to add the department " + response.data.error);
+      }
+    } catch (error) {
+      if (error.response && !error.response.data.success) {
+        alert(error.response.data.error);
+      }
+    }
+  };
+
   return (
     <div className="max-w-3x1 mx-auto mt-10 bg-white p-8 rounded-md shadow-md w-96">
       <h2 className="text-2x1 font-bold mb-6">Add New Department</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label
             htmlFor="dep_name"
@@ -15,6 +58,8 @@ const AddDepartment = () => {
           </label>
           <input
             type="text"
+            name="dep_name"
+            onChange={handleChange}
             placeholder="Department Name"
             className="mt-1 w-full p-2 border border-gray-300 rounded-md"
             required
@@ -29,6 +74,7 @@ const AddDepartment = () => {
           </label>
           <textarea
             name="description"
+            onChange={handleChange}
             placeholder="Description"
             className="mt-1 p-2 block w-full border border-gray-300 rounded-md"
             rows="4"
