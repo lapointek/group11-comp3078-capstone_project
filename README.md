@@ -7,3 +7,7 @@
 ### cd frontend - `npm run dev`
 
 ### Open http://localhost:5173/login
+
+### Email - admin@gmail.com
+
+### Pass - admin

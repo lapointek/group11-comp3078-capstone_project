@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/department", departmentRouter);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 connectDB()
   .then(() => {
