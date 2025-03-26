@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import DataTable from "react-data-table-component";
 
 const DepartmentList = () => {
   return (
@@ -20,6 +21,7 @@ const DepartmentList = () => {
           Add New Department
         </Link>
       </div>
+      <div></div>
     </div>
   );
 };
