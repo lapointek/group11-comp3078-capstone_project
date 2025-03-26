@@ -15,7 +15,7 @@ const verifyUser = async (req, res, next) => {
 
     // verify token
     const decoded = await jwt.verify(token, process.env.JWT_KEY);
-    // if token is wrong
+    // if token is wrong return
     if (!decoded) {
       return res.status(401).json({ success: false, error: "Token Not Valid" });
     }
