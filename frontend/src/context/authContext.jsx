@@ -3,12 +3,13 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const userContext = createContext();
 
 // context api to login and logout for user authentication
+// useStates
 const authContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // verify user
   useEffect(() => {
+    // verify user
     const verifyUser = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -28,6 +29,7 @@ const authContext = ({ children }) => {
           }
         } else {
           setUser(null);
+          setLoading(false);
         }
       } catch (error) {
         if (error.reponse && !error.response.data.error) {
