@@ -1,7 +1,7 @@
 # Automated Inventory Management System
 
 The Automated Inventory Management System is a web application that improves efficiency
-for companies to manage employee information. The AIMS application allows management to keep track of employees, employee information, employee salary, leave dates, and departments.
+for companies to manage employee information. The AIMS application allows management to keep track of total employees, employee information, employee salary, leave dates, and departments.
 
 ## How To Use
 
