@@ -11,14 +11,14 @@ for companies to manage employee information. The AIMS application allows manage
 
 ### Open http://localhost:5173/login
 
-## Login
-
-### Email - `admin@gmail.com`
-
-### Password - `admin`
-
 ## Install Required Software if Needed
 
 ### cd server - `npm i dotenv`
 
 ### cd frontend - `npm i vite`
+
+## Login
+
+### Email - `admin@gmail.com`
+
+### Password - `admin`
