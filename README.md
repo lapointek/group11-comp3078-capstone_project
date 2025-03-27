@@ -15,7 +15,7 @@ for companies to manage employee information. The AIMS application allows manage
 
 ### Email - `admin@gmail.com`
 
-### Pass - `admin`
+### Password - `admin`
 
 ## Install Required Software if Needed
 
